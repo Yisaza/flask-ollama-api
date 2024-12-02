@@ -22,8 +22,8 @@ def inference():
 
         # Memanggil model Ollama
         try:
-            response = ollama.generate(prompt=prompt, model="llama3.2")  # Gunakan model yang tersedia
-            if hasattr(response, "response"):  # Pastikan respons memiliki atribut 'response'
+            response = ollama.generate(prompt=prompt, model="llama3.2")  
+            if hasattr(response, "response"):  
                 return jsonify({"response": response.response}), 200
             else:
                 return jsonify({"error": "Missing 'response' in Ollama output"}), 500
