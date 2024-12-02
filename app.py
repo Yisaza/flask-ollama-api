@@ -10,17 +10,17 @@ def home():
 @app.route('/inference', methods=['POST'])
 def inference():
     try:
-        # Mengambil JSON dari permintaan
+        # JSON request
         data = request.get_json()
         if not data:
             return jsonify({"error": "Invalid or missing JSON data"}), 400
 
-        # Mendapatkan prompt dari JSON
+        # JSON prompt
         prompt = data.get("prompt", "").strip()
         if not prompt:
             return jsonify({"error": "Prompt is required"}), 400
 
-        # Memanggil model Ollama
+        # Ollama model
         try:
             response = ollama.generate(prompt=prompt, model="llama3.2")  
             if hasattr(response, "response"):  
@@ -31,7 +31,7 @@ def inference():
             return jsonify({"error": f"Ollama Error: {str(ollama_error)}"}), 500
 
     except Exception as e:
-        # Menangani error lainnya
+        # error handle
         return jsonify({"error": f"Unexpected Error: {str(e)}"}), 500
 
 if __name__ == '__main__':
